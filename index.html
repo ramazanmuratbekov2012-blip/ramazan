@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Айзада & Улан | Wedding Invitation</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8f1ed;
+  color: #60484b;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* COVER */
+
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top, #fff8f4, #ead7d2);
+  transition: opacity 1s ease, visibility 1s;
+}
+
+.cover.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  letter-spacing: 4px;
+  margin-bottom: 35px;
+  color: #87666a;
+}
+
+.envelope {
+  width: 290px;
+  height: 190px;
+  position: relative;
+  background: #d9b9b5;
+  box-shadow: 0 20px 50px #8c656533;
+  border-radius: 4px;
+  cursor: pointer;
+  perspective: 900px;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #e7c9c4;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: #d5b0ad;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  z-index: 2;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eedbd6;
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: top;
+  transition: transform 1s ease;
+  z-index: 4;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.seal {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: #a8757b;
+  border: 2px solid #f1d8d4;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 25px;
+  box-shadow: 0 3px 12px #80565a55;
+  transition: opacity .5s;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.open-text {
+  margin-top: 35px;
+  letter-spacing: 3px;
+  font-size: 16px;
+  color: #89666b;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .6; }
+  50% { opacity: 1; }
+}
+
+/* MAIN */
+
+main {
+  max-width: 650px;
+  margin: auto;
+  padding: 0 20px 50px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero img {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: cover;
+  border-radius: 200px 200px 8px 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 15px 40px #6e4d4d22;
+}
+
+.small-title {
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a47c80;
+  margin-bottom: 15px;
+}
+
+.names {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 10vw, 72px);
+  font-weight: 400;
+  color: #805b60;
+  line-height: 1.15;
+}
+
+.amp {
+  font-style: italic;
+  color: #b88b91;
+}
+
+.subtitle {
+  font-size: 22px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+.section {
+  padding: 65px 0;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: #805b60;
+  margin-bottom: 25px;
+}
+
+.text {
+  font-size: 23px;
+  line-height: 1.7;
+}
+
+.date {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #956e74;
+  margin: 20px 0;
+}
+
+.details {
+  background: #fffaf7;
+  padding: 35px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px #7554540c;
+}
+
+.detail-item {
+  margin: 25px 0;
+}
+
+.detail-label {
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b08a8d;
+  margin-bottom: 8px;
+}
+
+.detail-value {
+  font-size: 27px;
+  color: #76565b;
+}
+
+.divider {
+  width: 80px;
+  height: 1px;
+  background: #d8b6b5;
+  margin: 30px auto;
+}
+
+/* GALLERY */
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px #76545415;
+}
+
+.gallery img:first-child {
+  grid-column: span 2;
+  height: 350px;
+}
+
+/* CAT */
+
+.cat-photo {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 60px 0 30px;
+  font-size: 23px;
+  line-height: 1.7;
+}
+
+.footer-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #956d73;
+  margin: 20px 0;
+}
+
+.heart {
+  color: #bd858c;
+}
+
+/* MUSIC BUTTON */
+
+.music-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #a77980;
+  color: white;
+  font-size: 22px;
+  box-shadow: 0 5px 20px #6e4d4d33;
+  display: none;
+}
+
+.music-btn.show {
+  display: block;
+}
+
+/* ANIMATION */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .envelope {
+    width: 260px;
+    height: 170px;
+  }
+
+  .gallery img {
+    height: 190px;
+  }
+
+  .gallery img:first-child {
+    height: 280px;
+  }
+
+  .section {
+    padding: 45px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- COVER -->
+
+<div class="cover" id="cover">
+
+  <div class="cover-title">
+    WEDDING INVITATION
+  </div>
+
+  <div class="envelope" id="envelope">
+
+    <div class="envelope-back"></div>
+
+    <div class="envelope-front"></div>
+
+    <div class="envelope-flap"></div>
+
+    <div class="seal">♡</div>
+
+  </div>
+
+  <div class="open-text">
+    КОНВЕРТТИ АЧУУ
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn">
+  ♫
+</button>
+
+<!-- WEBSITE -->
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <img src="photo1.jpg" alt="Айзада жана Улан">
+
+    <div class="small-title">
+      Биздин үйлөнүү тоюбузга
+    </div>
+
+    <h1 class="names">
+      Айзада
+      <span class="amp">&</span>
+      Улан
+    </h1>
+
+    <p class="subtitle">
+      Сиздерди тойубуздун<br>
+      урматтуу коногу болууга чакырабыз
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="text">
+      30 • 11 • 2026
+    </p>
+
+  </section>
+
+  <!-- INVITATION -->
+
+  <section class="section reveal">
+
+    <h2 class="section-title">
+      Урматтуу туугандар жана достор!
+    </h2>
+
+    <p class="text">
+      Сиздерди биздин жашообуздагы
+      эң бактылуу күндүн күбөсү болуп,
+      үйлөнүү тоюбузга келип,
+      кубанычыбызды бөлүшүүгө
+      чакырабыз.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="date">
+      30-ноябрь
+    </div>
+
+    <p class="text">
+      2026-жыл
+    </p>
+
+  </section>
+
+  <!-- DETAILS -->
+
+  <section class="section reveal">
+
+    <h2 class="section-title">
+      Тойдун дареги
+    </h2>
+
+    <div class="details">
+
+      <div class="detail-item">
+
+        <div class="detail-label">
+          Шаар
+        </div>
+
+        <div class="detail-value">
+          Бишкек
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="detail-item">
+
+        <div class="detail-label">
+          Ресторан
+        </div>
+
+        <div class="detail-value">
+          Alif
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="detail-item">
+
+        <div class="detail-label">
+          Башталышы
+        </div>
+
+        <div class="detail-value">
+          Саат 18:00
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PHOTO GALLERY -->
+
+  <section class="section reveal">
+
+    <h2 class="section-title">
+      Биздин эскерүүлөр
+    </h2>
+
+    <div class="gallery">
+
+      <img src="photo2.jpg" alt="Love Story">
+
+      <img src="photo3.jpg" alt="Love Story">
+
+      <img src="photo4.jpg" alt="Love Story">
+
+      <img src="photo5.jpg" alt="Love Story">
+
+      <img src="photo6.jpg" alt="Love Story">
+
+    </div>
+
+  </section>
+
+  <!-- CAT PHOTOS -->
+
+  <section class="section reveal">
+
+    <h2 class="section-title">
+      ♡
+    </h2>
+
+    <img
+      src="cat1.jpg"
+      class="cat-photo"
+      alt="Мышык">
+
+    <img
+      src="cat2.jpg"
+      class="cat-photo"
+      alt="Мышык">
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <section class="footer reveal">
+
+    <p>
+      Тойго чакыргандар:
+    </p>
+
+    <div class="footer-names">
+      Рамазан Нарынкуль
+    </div>
+
+    <p>
+      Тойго келип,<br>
+      конок болуп кетиңиздер!
+    </p>
+
+    <div class="divider"></div>
+
+    <p>
+      Сиздерди чыдамсыздык<br>
+      менен күтөбүз!
+    </p>
+
+    <div class="footer-names">
+      Айзада <span class="heart">♡</span> Улан
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+const cover = document.getElementById("cover");
+const envelope = document.getElementById("envelope");
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+let opened = false;
+
+envelope.addEventListener("click", function () {
+
+  if (opened) return;
+
+  opened = true;
+
+  envelope.classList.add("open");
+
+  setTimeout(function () {
+
+    cover.classList.add("hide");
+
+    music.play().then(function () {
+      musicBtn.classList.add("show");
+      musicBtn.textContent = "♫";
+    }).catch(function () {
+      musicBtn.classList.add("show");
+    });
+
+  }, 900);
+
+});
+
+musicBtn.addEventListener("click", function () {
+
+  if (music.paused) {
+
+    music.play();
+    musicBtn.textContent = "♫";
+
+  } else {
+
+    music.pause();
+    musicBtn.textContent = "♪";
+
+  }
+
+});
+
+// Reveal animation
+
+const observer = new IntersectionObserver(function (entries) {
+
+  entries.forEach(function (entry) {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+
+  });
+
+}, {
+  threshold: 0.15
+});
+
+document.querySelectorAll(".reveal").forEach(function (element) {
+  observer.observe(element);
+});
+</script>
+
+</body>
+</html>
